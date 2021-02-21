@@ -1,0 +1,14 @@
+config {
+  type: "view",
+  schema: "client",
+  description: "Create a owner view of dim_users"
+}
+
+select 
+id ownerId,
+userId ownerUserId,
+displayName ownerDisplayName,
+location ownerLocation,
+age ownerAge
+from 
+  ${ref("dim_users")}

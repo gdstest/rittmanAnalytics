@@ -1,5 +1,5 @@
 config {
-  type: "view",
+  type: "table",
   schema: "client",
   description: "Cleaned version of stackoverflow.users table"
 }

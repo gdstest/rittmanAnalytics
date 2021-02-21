@@ -1,0 +1,14 @@
+config {
+  type: "view",
+  schema: "client",
+  description: "Create a editor view of dim_users"
+}
+
+select 
+id lastEditorId,
+userId lastEditorUserId,
+displayName lastEditorDisplayName,
+location lastEditorLocation,
+age lastEditorAge
+from 
+  ${ref("dim_users")}
