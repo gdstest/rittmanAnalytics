@@ -1,0 +1,61 @@
+config {
+  type: "table",
+  schema: "client",
+  description: "Create reference date table "
+}
+
+with a as
+(select min(creationDate) minDate,
+FROM ${ref('_posts')} 
+union all
+select min(communityOwnedDate) minDate,
+FROM ${ref('_posts')} 
+union all
+select min(lastEditDate) minDate,
+FROM ${ref('_posts')}  
+union all
+select min(lastActivityDate) minDate,
+FROM ${ref('_posts')}  ),
+
+b as
+(select generate_date_array(date(min(minDate)),current_date()) dates 
+from a),
+
+c as
+(select date,
+from b, unnest(b.dates) as date
+order by date)
+
+select row_number() over() dateKey,
+date,
+case when extract(dayofweek from date) =1 then "sunday"
+when extract(dayofweek from date) =2 then 'monday'
+when extract(dayofweek from date) =3 then 'tuesday'
+when extract(dayofweek from date) =4 then 'wednesday'
+when extract(dayofweek from date) =5 then 'thursday'
+when extract(dayofweek from date) =6 then 'friday'
+when extract(dayofweek from date) =7 then 'saturday'
+else null end dayofweek,
+case when extract(month from date) = 1 then 'january'
+when extract(month from date) = 2 then 'february'
+when extract(month from date) = 3 then 'march'
+when extract(month from date) = 4 then 'april'
+when extract(month from date) = 5 then 'may'
+when extract(month from date) = 6 then 'june'
+when extract(month from date) = 7 then 'july'
+when extract(month from date) = 8 then 'august'
+when extract(month from date) = 9 then 'september'
+when extract(month from date) = 10 then 'october'
+when extract(month from date) = 11 then 'november'
+when extract(month from date) = 12 then 'december'
+else null end month,
+case when extract(quarter from date) =1 then 'Q1'
+when extract(quarter from date) =2 then 'Q2'
+when extract(quarter from date) =3 then 'Q3'
+when extract(quarter from date) =4 then 'Q4'
+else null end quarter,
+extract(year from date) year
+
+
+
+from c
