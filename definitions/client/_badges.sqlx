@@ -1,0 +1,16 @@
+config {
+  type: "view",
+  schema: "client",
+  description: "Cleaned version of stackoverflow.badges table"
+}
+
+select
+  id as badgeId,
+  name badgeName,
+  date badgeDate,
+  user_id userId,
+  class badgeClass,
+  tag_based
+  
+from
+  ${ref("badges")}
