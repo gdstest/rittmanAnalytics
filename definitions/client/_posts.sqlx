@@ -1,3 +1,10 @@
+config {
+  type: "view",
+  schema: "client",
+  description: "Cleaned version of combined questions and answers tables"
+}
+
+
 select
 id postId,
 'question' postType,
