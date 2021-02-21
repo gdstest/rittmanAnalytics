@@ -1,0 +1,14 @@
+config {
+  type: "view",
+  schema: "client",
+  description: "Create a owner view of dim_dates for date LastActivity"
+}
+
+select 
+dateId dateIdLastActivity,
+date dateLastActivity,
+dayOfWeek dayOfWeekLastActivity,
+month monthLastActivity,
+year yearLastActivity
+from
+${ref('dim_dates')}

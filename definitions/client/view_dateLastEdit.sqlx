@@ -1,0 +1,14 @@
+config {
+  type: "view",
+  schema: "client",
+  description: "Create a owner view of dim_dates for date LastEdit"
+}
+
+select 
+dateId dateIdLastEdit,
+date dateLastEdit,
+dayOfWeek dayOfWeekLastEdit,
+month monthLastEdit,
+year yearLastEdit
+from
+${ref('dim_dates')}

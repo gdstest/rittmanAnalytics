@@ -26,7 +26,7 @@ c as
 from b, unnest(b.dates) as date
 order by date)
 
-select row_number() over() dateKey,
+select row_number() over() dateId,
 date,
 case when extract(dayofweek from date) =1 then "sunday"
 when extract(dayofweek from date) =2 then 'monday'
