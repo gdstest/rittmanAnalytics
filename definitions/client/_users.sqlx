@@ -1,0 +1,15 @@
+config {
+  type: "view",
+  schema: "client",
+  description: "Cleaned version of stackoverflow.users table"
+}
+
+select
+  row_number() over() id,
+  id as userId,
+  display_name displayName,
+  location,
+  cast(age as int64) age
+from
+  ${ref("users")}
+  order by id
