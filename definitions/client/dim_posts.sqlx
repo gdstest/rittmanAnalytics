@@ -1,0 +1,14 @@
+config {
+  type: "table",
+  schema: "client",
+  description: "create posts table",
+  assertions: {
+    uniqueKey: ["postId"]
+  }
+}
+
+select
+postId,
+title
+from
+  ${ref("_posts")}
