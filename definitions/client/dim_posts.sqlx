@@ -9,7 +9,9 @@ config {
 
 select
 postId,
+parentId,
 postType,
-title
+title,
+acceptedAnswerId
 from
   ${ref("_posts")}
