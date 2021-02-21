@@ -1,7 +1,10 @@
 config {
   type: "table",
   schema: "client",
-  description: "Cleaned version of stackoverflow.users table"
+  description: "Cleaned version of stackoverflow.users table",
+    assertions: {
+    uniqueKey: ["userId"]
+  }
 }
 
 select

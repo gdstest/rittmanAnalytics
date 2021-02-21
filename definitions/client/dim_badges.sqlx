@@ -1,8 +1,18 @@
 config {
-  type: "view"
+  type: "table",
+  schema: "client",
+  description: "duplicate of _badges table",
+  assertions: {
+    uniqueKey: ["badgeId"]
+  }
 }
 
--- select *
--- from 
---   ${ref("table_name")} / schema.table_name
--- read more about ref() in the documentation tab -->
+select
+  badgeId,
+  badgeName,
+  badgeDate,
+  userId,
+  badgeClass,
+  tag_based
+from
+  ${ref("_badges")}

@@ -1,7 +1,10 @@
 config {
   type: "table",
   schema: "client",
-  description: "Create reference date table "
+  description: "Create reference date table ",
+    assertions: {
+    uniqueKey: ["date"]
+  }
 }
 
 with a as
