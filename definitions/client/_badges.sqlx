@@ -7,7 +7,7 @@ config {
 select
   id as badgeId,
   name badgeName,
-  date badgeDate,
+  date(date) badgeDate,
   user_id userId,
   class badgeClass,
   tag_based
