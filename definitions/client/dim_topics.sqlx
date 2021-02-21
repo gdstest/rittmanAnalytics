@@ -1,0 +1,19 @@
+config {
+  type: "table",
+  schema: "client",
+  description: "create topic table",
+  assertions: {
+    uniqueKey: ["topicId"]
+  }
+}
+
+with a as
+(select split(topics,"|") topics
+FROM ${ref('_posts')}
+where topics is not null
+)
+
+select  row_number() over() topicId,topic
+from a,unnest(a.topics) topic
+group by topic
+order by topicId
