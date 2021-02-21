@@ -1,0 +1,45 @@
+select
+id postId,
+'question' postType,
+title,
+accepted_answer_id acceptedAnswerId,
+answer_count answerCount,
+comment_count commentCount,
+community_owned_date communityOwnedDate,
+creation_date creationDate,
+favorite_count favoriteCount,
+last_activity_date lastActivityDate,
+last_edit_date lastEditDate,
+last_editor_user_id lastEditorUserId,
+owner_user_id owneruserId,
+post_type_id postTypeId,
+cast(parent_id as int64) parentId,
+score,
+tags topics,
+view_count viewCount
+from
+  ${ref("posts_questions")}
+
+union all
+
+select
+id postId,
+'answer' postType,
+title,
+cast(accepted_answer_id as int64) acceptedAnswerId,
+cast(answer_count as int64) answerCount,
+comment_count commentCount,
+community_owned_date communityOwnedDate,
+creation_date creationDate,
+cast(favorite_count as int64) favoriteCount,
+last_activity_date lastActivityDate,
+last_edit_date lastEditDate,
+last_editor_user_id lastEditorUserId,
+owner_user_id owneruserId,
+post_type_id postTypeId,
+parent_id parentId,
+score,
+tags topics,
+cast(view_count as int64) viewCount
+from
+${ref("posts_answers")}
