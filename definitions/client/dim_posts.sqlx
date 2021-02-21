@@ -9,6 +9,7 @@ config {
 
 select
 postId,
+postType,
 title
 from
   ${ref("_posts")}

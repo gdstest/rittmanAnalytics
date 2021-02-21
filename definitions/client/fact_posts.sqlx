@@ -1,0 +1,29 @@
+config {
+  type: "table",
+  schema: "client",
+  description: "Create fact table for posts"
+}
+
+
+select
+postId,
+postType,
+title,
+accepted_answer_id acceptedAnswerId,
+answer_count answerCount,
+comment_count commentCount,
+community_owned_date communityOwnedDate,
+creation_date creationDate,
+favorite_count favoriteCount,
+last_activity_date lastActivityDate,
+last_edit_date lastEditDate,
+last_editor_user_id lastEditorUserId,
+owner_user_id owneruserId,
+post_type_id postTypeId,
+cast(parent_id as int64) parentId,
+score,
+tags topics,
+view_count viewCount
+from
+  ${ref("_posts")}
+
