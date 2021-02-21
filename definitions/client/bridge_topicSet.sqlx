@@ -4,14 +4,11 @@ config {
   description: "create topicSet bridging table"
 }
 
-with a as
-(select topics topicSet,split(topics,'|') topics
-FROM ${ref('_posts')} 
-group by topicSet),
+with b as
 
-b as
 (select row_number() over() topicSetId, topicSet
-from a
+from ${ref('_posts')}
+group by topicSet
 order by topicSetId),
 
 c as
@@ -22,7 +19,7 @@ d as
 (select row_number() over() id,topicSetid,topicSet, topic
 from c,unnest(c.topics) topic)
 
-select d.* except(topicSet,topic),topicId
+select d.* except(topic),topicId
 from d
 left join ${ref('dim_topics')} e
 on d.topic = e.topic

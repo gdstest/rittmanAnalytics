@@ -7,13 +7,34 @@ config {
 
 select
 postId,
+ownerId,
+lastEditorId,
+dateIdCommunityOwned,
+dateIdCreation,
+dateIdLastActivity,
+dateIdLastEdit,
+topicSetId,
 answerCount,
 commentCount,
-communityOwnedDate,
-creationDate,
 favoriteCount,
 score,
 viewCount
 from
-  ${ref("_posts")}
+  ${ref("_posts")} a
+left join ${ref('view_editors')} b
+on a.lastEditorUserId = b.lastEditorUserId
+left join ${ref('view_owners')} c
+on a.ownerUserId = c.ownerUserId
+left join ${ref('view_dateCommunityOwned')} d
+on a.dateCommunityOwned = d.dateCommunityOwned
+left join ${ref('view_dateCreation')} e
+on a.dateCreation = e.dateCreation
+left join ${ref('view_dateLastActivity')} f
+on a.dateLastActivity = f.dateLastActivity
+left join ${ref('view_dateLastEdit')} g
+on a.dateLastEdit = g.dateLastEdit
+left join ${ref('bridge_topicSet')} h
+on a.topicSet = h.topicSet
+
+
 

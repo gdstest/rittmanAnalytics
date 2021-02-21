@@ -8,16 +8,16 @@ config {
 }
 
 with a as
-(select min(creationDate) minDate,
+(select min(dateCreation) minDate,
 FROM ${ref('_posts')} 
 union all
-select min(communityOwnedDate) minDate,
+select min(dateCommunityOwned) minDate,
 FROM ${ref('_posts')} 
 union all
-select min(lastEditDate) minDate,
+select min(dateLastEdit) minDate,
 FROM ${ref('_posts')}  
 union all
-select min(lastActivityDate) minDate,
+select min(dateLastActivity) minDate,
 FROM ${ref('_posts')}  ),
 
 b as
